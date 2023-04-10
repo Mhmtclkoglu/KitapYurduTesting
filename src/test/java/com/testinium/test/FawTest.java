@@ -17,7 +17,7 @@ public class FawTest extends MainTest {
 
         Methods methods = new Methods();
 
-
+        // Favorliler ekleyip kntorol edilir
         String text1 = methods.getText(By.xpath("(//a[@title='Oyuncak Tamirhanesi'])[1]"));
         methods.waitBySeconds(1);
         String text2 = methods.getText(By.xpath("//a[@title='Emre ve Tahta Oyuncak']"));
@@ -60,6 +60,7 @@ public class FawTest extends MainTest {
         Assert.assertEquals(text3, expectedtext3);
         Assert.assertEquals(text4, expectedtext4);
 
+        // Ana sayfaya geri dönülür ve puan kataloğundaki türk kalsikleri seçilir
         methods.click(By.xpath("//div[@class='logo-text']"));
         methods.waitBySeconds(1);
 
@@ -72,8 +73,10 @@ public class FawTest extends MainTest {
         methods.selectByText(By.cssSelector(".sort > select"), "Yüksek Oylama");
         methods.waitBySeconds(1);
 
+        // Hobi kısmı seçilir
         driver.get("https://www.kitapyurdu.com/kategori/kitap-hobi/1_212.html");
 
+        // Random bir kitap seçilir ve sepete eklenir ve favrolirden bir kitap silinir
         methods.randomElement(By.xpath("/html/body/div[5]/div/div[3]/div/div[1]/div/div[2]/ul/li"));
         methods.waitBySeconds(2);
 
@@ -95,6 +98,7 @@ public class FawTest extends MainTest {
         methods.click(By.xpath("//a[@id='js-cart']"));
         methods.waitBySeconds(2);
 
+        // Sepetteki ürün arttırlır
         WebElement input = methods.findElement(By.xpath("//input[@name='quantity']"));
         input.clear();
         methods.waitBySeconds(1);
@@ -102,6 +106,7 @@ public class FawTest extends MainTest {
         methods.click(By.xpath(" //i[@class='fa fa-refresh green-icon']"));
         methods.waitBySeconds(1);
 
+        // Ürün satın alınır, yeni adrs eklenir
         methods.click(By.xpath("//div[@class='right']/a[contains(.,'Satın Al')]"));
         methods.waitBySeconds(1);
 
@@ -151,8 +156,9 @@ public class FawTest extends MainTest {
         methods.waitBySeconds(1);
 
         methods.click(By.xpath(" //button[@id='button-checkout-continue']"));
-        methods.waitBySeconds(1);
+        methods.waitBySeconds(2);
 
+        // Kart bilgileri yanlış girilerek kontrol edilir.
         WebElement kartsahibi = methods.findElement(By.xpath("//input[@id='credit-card-owner']"));
         kartsahibi.sendKeys("Mehmet Ali Çolakoğlu");
         methods.waitBySeconds(1);
@@ -182,6 +188,7 @@ public class FawTest extends MainTest {
         WebElement gecersiz = methods.findElement(By.xpath(" //span[@class='error']"));
         assert gecersiz.getText().equals("Kart numarası geçersiz. Kontrol ediniz!");
 
+        // Ana sayfaya dönülür ve çıkış yapılır.
         methods.click(By.xpath("//img[@alt='kitapyurdu.com']"));
         methods.waitBySeconds(1);
 
